@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Application
+    x:Class="AntiAway.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <XamlControlsResources xmlns="using:Microsoft.UI.Xaml.Controls" />
+            </ResourceDictionary.MergedDictionaries>
+
+            <Color x:Key="AntiAwayAccentColor">#C7FF33</Color>
+            <SolidColorBrush x:Key="AntiAwayAccentBrush" Color="{StaticResource AntiAwayAccentColor}" />
+            <SolidColorBrush x:Key="AntiAwayPanelBrush" Color="#F21F211C" />
+            <SolidColorBrush x:Key="AntiAwaySurfaceBrush" Color="#59000000" />
+            <SolidColorBrush x:Key="AntiAwaySecondaryBrush" Color="#99FFFFFF" />
+            <SolidColorBrush x:Key="AntiAwayLineBrush" Color="#20FFFFFF" />
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>
+

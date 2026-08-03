@@ -1,0 +1,16 @@
+bin/
+obj/
+.vs/
+.vscode/
+artifacts/
+*.user
+*.suo
+*.nupkg
+*.msix
+*.msixbundle
+*.appx
+*.appxbundle
+*.cer
+*.pfx
+TestResults/
+

@@ -1,0 +1,12 @@
+<Project>
+  <PropertyGroup>
+    <Version>0.1.0</Version>
+    <Authors>AntiAway</Authors>
+    <Company>AntiAway</Company>
+    <Product>AntiAway</Product>
+    <Copyright>Copyright © 2026 AntiAway</Copyright>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+</Project>
+

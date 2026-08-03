@@ -1,0 +1,25 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AntiAway", "src\AntiAway\AntiAway.csproj", "{4F7CE913-4FBD-4CB2-8A5F-B5AF1B903908}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|ARM64 = Debug|ARM64
+		Debug|x64 = Debug|x64
+		Release|ARM64 = Release|ARM64
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4F7CE913-4FBD-4CB2-8A5F-B5AF1B903908}.Debug|ARM64.ActiveCfg = Debug|ARM64
+		{4F7CE913-4FBD-4CB2-8A5F-B5AF1B903908}.Debug|ARM64.Build.0 = Debug|ARM64
+		{4F7CE913-4FBD-4CB2-8A5F-B5AF1B903908}.Debug|x64.ActiveCfg = Debug|x64
+		{4F7CE913-4FBD-4CB2-8A5F-B5AF1B903908}.Debug|x64.Build.0 = Debug|x64
+		{4F7CE913-4FBD-4CB2-8A5F-B5AF1B903908}.Release|ARM64.ActiveCfg = Release|ARM64
+		{4F7CE913-4FBD-4CB2-8A5F-B5AF1B903908}.Release|ARM64.Build.0 = Release|ARM64
+		{4F7CE913-4FBD-4CB2-8A5F-B5AF1B903908}.Release|x64.ActiveCfg = Release|x64
+		{4F7CE913-4FBD-4CB2-8A5F-B5AF1B903908}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+EndGlobal
+

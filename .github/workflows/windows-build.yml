@@ -1,0 +1,37 @@
+name: Windows build
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+
+      - name: Install .NET 10 SDK
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 10.0.x
+
+      - name: Restore
+        run: dotnet restore src/AntiAway/AntiAway.csproj -p:Platform=x64 -r win-x64
+
+      - name: Build
+        run: dotnet build src/AntiAway/AntiAway.csproj --configuration Release --no-restore -p:Platform=x64 -r win-x64
+
+      - name: Publish self-contained app
+        shell: pwsh
+        run: ./scripts/Publish.ps1 -RuntimeIdentifier win-x64 -Configuration Release
+
+      - name: Upload publish output
+        uses: actions/upload-artifact@v4
+        with:
+          name: AntiAway-win-x64
+          path: artifacts/publish/win-x64
+          if-no-files-found: error

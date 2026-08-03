@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window
+    x:Class="AntiAway.SettingsWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Title="AntiAway Settings">
+
+    <ScrollViewer>
+        <StackPanel x:Name="SettingsRoot" Padding="24" Spacing="18">
+            <StackPanel Spacing="4">
+                <TextBlock FontSize="24" FontWeight="SemiBold" Text="Settings" />
+                <TextBlock
+                    Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                    Text="Configure how AntiAway behaves on this computer." />
+            </StackPanel>
+
+            <Border Padding="16" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" CornerRadius="10">
+                <StackPanel Spacing="14">
+                    <TextBlock FontSize="15" FontWeight="SemiBold" Text="Activity" />
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Spacing="2">
+                            <TextBlock Text="Stay active" />
+                            <TextBlock FontSize="12" Foreground="{ThemeResource TextFillColorSecondaryBrush}" Text="Send a local mouse-move signal at the chosen interval." />
+                        </StackPanel>
+                        <ToggleSwitch
+                            x:Name="StayActiveToggle"
+                            Grid.Column="1"
+                            OffContent=""
+                            OnContent=""
+                            Toggled="StayActiveToggle_Toggled" />
+                    </Grid>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Spacing="2">
+                            <TextBlock Text="Activity interval" />
+                            <TextBlock FontSize="12" Foreground="{ThemeResource TextFillColorSecondaryBrush}" Text="How often AntiAway posts its signal." />
+                        </StackPanel>
+                        <ComboBox
+                            x:Name="IntervalComboBox"
+                            Grid.Column="1"
+                            MinWidth="150"
+                            DisplayMemberPath="Title"
+                            SelectionChanged="IntervalComboBox_SelectionChanged" />
+                    </Grid>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Spacing="2">
+                            <TextBlock Text="Prevent system sleep while active" />
+                            <TextBlock MaxWidth="330" FontSize="12" Foreground="{ThemeResource TextFillColorSecondaryBrush}" Text="Keeps Windows awake without forcing the display to remain on." TextWrapping="Wrap" />
+                        </StackPanel>
+                        <ToggleSwitch
+                            x:Name="KeepAwakeToggle"
+                            Grid.Column="1"
+                            OffContent=""
+                            OnContent=""
+                            Toggled="KeepAwakeToggle_Toggled" />
+                    </Grid>
+                </StackPanel>
+            </Border>
+
+            <Border Padding="16" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" CornerRadius="10">
+                <StackPanel Spacing="14">
+                    <TextBlock FontSize="15" FontWeight="SemiBold" Text="Startup" />
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Spacing="2">
+                            <TextBlock Text="Launch AntiAway at login" />
+                            <TextBlock MaxWidth="330" FontSize="12" Foreground="{ThemeResource TextFillColorSecondaryBrush}" Text="Starts silently in the system tray after you sign in." TextWrapping="Wrap" />
+                        </StackPanel>
+                        <ToggleSwitch
+                            x:Name="LaunchAtLoginToggle"
+                            Grid.Column="1"
+                            OffContent=""
+                            OnContent=""
+                            Toggled="LaunchAtLoginToggle_Toggled" />
+                    </Grid>
+                </StackPanel>
+            </Border>
+
+            <Border Padding="16" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" CornerRadius="10">
+                <StackPanel Spacing="10">
+                    <TextBlock FontSize="15" FontWeight="SemiBold" Text="Privacy" />
+                    <TextBlock
+                        Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                        Text="AntiAway runs entirely on this computer. It makes no network requests, records no keys, takes no screenshots, and does not collect analytics."
+                        TextWrapping="Wrap" />
+                    <Button HorizontalAlignment="Left" Click="ShowWelcomeButton_Click" Content="Show welcome screen" />
+                </StackPanel>
+            </Border>
+
+            <InfoBar
+                x:Name="ErrorInfoBar"
+                IsClosable="True"
+                IsOpen="False"
+                Severity="Error"
+                Title="AntiAway couldn't save that change" />
+        </StackPanel>
+    </ScrollViewer>
+</Window>
+
