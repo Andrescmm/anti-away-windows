@@ -8,7 +8,6 @@ It does not copy the reference Bash implementation. The Windows app uses C#,
 WinUI 3, `SendInput`, `SetThreadExecutionState`, and native system-tray APIs.
 It never invokes `cliclick`, Homebrew, shell daemons, or macOS frameworks.
 
-Before publishing this repository publicly, choose and add a license for the
-AntiAway codebase. The upstream MIT license does not automatically license this
-independent implementation. Do not commit signing certificates or private keys.
-
+AntiAway for Windows is released under the MIT license; see [`LICENSE`](LICENSE).
+The upstream MIT license does not automatically license this independent
+implementation. Do not commit signing certificates or private keys.
