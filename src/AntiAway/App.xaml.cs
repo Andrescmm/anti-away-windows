@@ -28,8 +28,10 @@ public partial class App : Application
         _mainWindow.Activate();
         _mainWindow.InitializeAfterActivation();
 
-        bool launchedAtStartup = args.Arguments
-            .Split(' ', StringSplitOptions.RemoveEmptyEntries)
+        // Unpackaged WinUI 3 apps receive an empty LaunchActivatedEventArgs.Arguments,
+        // so the startup flag has to be read from the process command line instead.
+        bool launchedAtStartup = Environment.GetCommandLineArgs()
+            .Skip(1)
             .Any(argument => argument.Equals("--startup", StringComparison.OrdinalIgnoreCase));
 
         if (!launchedAtStartup || _mainWindow.ViewModel.IsOnboardingVisible)
