@@ -34,6 +34,10 @@ SolidCompression=yes
 WizardStyle=modern
 ArchitecturesAllowed={#MyAppArchitectures}
 ArchitecturesInstallIn64BitMode={#MyAppArchitectures}
+#ifdef SignOutput
+SignTool=antiaway
+SignedUninstaller=yes
+#endif
 AppMutex=Local\AntiAway.Desktop.SingleInstance
 CloseApplications=yes
 RestartApplications=no
