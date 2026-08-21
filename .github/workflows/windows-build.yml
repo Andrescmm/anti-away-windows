@@ -3,12 +3,22 @@ name: Windows build
 on:
   push:
     branches: [main]
+    tags: ["v*"]
   pull_request:
   workflow_dispatch:
 
 jobs:
   build:
     runs-on: windows-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - runtime: win-x64
+            platform: x64
+          - runtime: win-arm64
+            platform: ARM64
 
     steps:
       - name: Check out source
@@ -20,18 +30,25 @@ jobs:
           dotnet-version: 10.0.x
 
       - name: Restore
-        run: dotnet restore src/AntiAway/AntiAway.csproj -p:Platform=x64 -r win-x64
+        run: dotnet restore src/AntiAway/AntiAway.csproj -p:Platform=${{ matrix.platform }} -r ${{ matrix.runtime }}
 
       - name: Build
-        run: dotnet build src/AntiAway/AntiAway.csproj --configuration Release --no-restore -p:Platform=x64 -r win-x64
+        run: dotnet build src/AntiAway/AntiAway.csproj --configuration Release --no-restore -p:Platform=${{ matrix.platform }} -r ${{ matrix.runtime }}
 
-      - name: Publish self-contained app
+      - name: Ensure Inno Setup is available
         shell: pwsh
-        run: ./scripts/Publish.ps1 -RuntimeIdentifier win-x64 -Configuration Release
+        run: |
+          if (-not (Test-Path "${env:ProgramFiles(x86)}\Inno Setup 6\ISCC.exe")) {
+            choco install innosetup --no-progress -y
+          }
 
-      - name: Upload publish output
+      - name: Build installer
+        shell: pwsh
+        run: ./scripts/Build-Installer.ps1 -Version 0.1.0 -RuntimeIdentifier ${{ matrix.runtime }}
+
+      - name: Upload installer
         uses: actions/upload-artifact@v4
         with:
-          name: AntiAway-win-x64
-          path: artifacts/publish/win-x64
+          name: AntiAway-${{ matrix.runtime }}-installer
+          path: artifacts/installer/*.exe
           if-no-files-found: error
