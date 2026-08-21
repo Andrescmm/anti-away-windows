@@ -1,12 +1,16 @@
 [CmdletBinding()]
 param(
-    [string]$Version = "0.1.0"
+    [string]$Version = "0.1.0",
+
+    [ValidateSet("win-x64", "win-arm64")]
+    [string]$RuntimeIdentifier = "win-x64"
 )
 
 $ErrorActionPreference = "Stop"
 $repoRoot = Split-Path -Parent $PSScriptRoot
+$arch = if ($RuntimeIdentifier -eq "win-arm64") { "arm64" } else { "x64" }
 
-& (Join-Path $PSScriptRoot "Publish.ps1") -RuntimeIdentifier win-x64 -Configuration Release
+& (Join-Path $PSScriptRoot "Publish.ps1") -RuntimeIdentifier $RuntimeIdentifier -Configuration Release
 
 $isccCandidates = @(
     @(
@@ -21,7 +25,7 @@ if ($isccCandidates.Count -eq 0) {
 }
 
 $installerScript = Join-Path $repoRoot "installer\AntiAway.iss"
-& $isccCandidates[0] "/DMyAppVersion=$Version" $installerScript
+& $isccCandidates[0] "/DMyAppVersion=$Version" "/DMyAppArch=$arch" $installerScript
 
 if ($LASTEXITCODE -ne 0) {
     throw "Inno Setup failed with exit code $LASTEXITCODE."

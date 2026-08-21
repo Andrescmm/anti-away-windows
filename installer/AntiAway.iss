@@ -2,6 +2,18 @@
   #define MyAppVersion "0.1.0"
 #endif
 
+#ifndef MyAppArch
+  #define MyAppArch "x64"
+#endif
+
+#if MyAppArch == "arm64"
+  #define MyAppRid "win-arm64"
+  #define MyAppArchitectures "arm64"
+#else
+  #define MyAppRid "win-x64"
+  #define MyAppArchitectures "x64compatible"
+#endif
+
 #define MyAppName "AntiAway"
 #define MyAppExeName "AntiAway.exe"
 
@@ -15,13 +27,13 @@ DefaultGroupName=AntiAway
 DisableProgramGroupPage=yes
 PrivilegesRequired=lowest
 OutputDir=..\artifacts\installer
-OutputBaseFilename=AntiAway-{#MyAppVersion}-Setup
+OutputBaseFilename=AntiAway-{#MyAppVersion}-{#MyAppArch}-Setup
 SetupIconFile=..\src\AntiAway\Assets\AntiAway.ico
 Compression=lzma2/ultra64
 SolidCompression=yes
 WizardStyle=modern
-ArchitecturesAllowed=x64compatible
-ArchitecturesInstallIn64BitMode=x64compatible
+ArchitecturesAllowed={#MyAppArchitectures}
+ArchitecturesInstallIn64BitMode={#MyAppArchitectures}
 AppMutex=Local\AntiAway.Desktop.SingleInstance
 CloseApplications=yes
 RestartApplications=no
@@ -31,7 +43,7 @@ UninstallDisplayIcon={app}\{#MyAppExeName}
 Name: "english"; MessagesFile: "compiler:Default.isl"
 
 [Files]
-Source: "..\artifacts\publish\win-x64\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "..\artifacts\publish\{#MyAppRid}\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
 
 [Icons]
 Name: "{autoprograms}\AntiAway"; Filename: "{app}\{#MyAppExeName}"
@@ -41,4 +53,3 @@ Root: HKCU; Subkey: "Software\Microsoft\Windows\CurrentVersion\Run"; ValueName: 
 
 [Run]
 Filename: "{app}\{#MyAppExeName}"; Description: "Launch AntiAway"; Flags: nowait postinstall skipifsilent
-
